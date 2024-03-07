@@ -40,5 +40,7 @@ public class CategoryController {
         return new ResponseEntity<>("Author Deleted By Id " + id, HttpStatus.NO_CONTENT);
     }
 
+//    @PutMapping("/categories/{id}")
+
 
 }

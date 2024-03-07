@@ -1,6 +1,5 @@
 package org.talent.todolist.service.impl;
 
-import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,15 @@ public class TaskServiceImpl implements TaskService {
         if (taskDao.existsById(id)){
             taskDao.deleteById(id);
         }
+    }
+
+    @Override
+    public Task findById(Long id) {
+        Task task = null;
+        if (taskDao.existsById(id)){
+            task = taskDao.findById(id).orElse(null);
+        }
+        return task;
     }
 
     @Override

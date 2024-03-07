@@ -25,6 +25,13 @@ public class TaskController {
         return new ResponseEntity<>(taskList, HttpStatus.OK);
     }
 
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Task> getTaskbyId(@PathVariable Long id){
+        Task task = taskService.findById(id);
+
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
     @PostMapping("/tasks")
     public ResponseEntity<HttpResponse> saveTask(@RequestBody NewTaskRequest request){
         Task task = taskService.createTask(request);
