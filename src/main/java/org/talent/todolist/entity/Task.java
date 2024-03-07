@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.talent.todolist.enumeration.RepeateType;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
@@ -20,9 +21,12 @@ public class Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
 //    without store with string annotation, it store with index number
     private RepeateType repeateType;
 
+//    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    private Category category;
 
 }
