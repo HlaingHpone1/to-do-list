@@ -15,4 +15,6 @@ public interface TaskService {
 
     Task findById(Long id);
 
+    Task updateById(Long id, NewTaskRequest request);
+
 }

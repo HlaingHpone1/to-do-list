@@ -25,6 +25,13 @@ public class CategoryController {
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<Category> getCategoryId(@PathVariable Long id){
+        Category category = categoryService.findById(id);
+
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
     @PostMapping("/categories")
     public ResponseEntity<HttpResponse> saveNewCategory(@RequestBody NewCategoryRequest request){
         Category category = categoryService.NewCategory(request);
@@ -40,7 +47,10 @@ public class CategoryController {
         return new ResponseEntity<>("Author Deleted By Id " + id, HttpStatus.NO_CONTENT);
     }
 
-//    @PutMapping("/categories/{id}")
-
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody NewCategoryRequest request){
+        Category category = categoryService.updateById(id, request);
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }
 
 }

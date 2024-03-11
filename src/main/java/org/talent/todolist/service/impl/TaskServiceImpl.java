@@ -27,11 +27,32 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Task updateById(Long id, NewTaskRequest request) {
+        Task task = null;
+//        Task task1 = null;
+        if (taskDao.existsById(id)){
+
+            task = Task.builder()
+                    .id(id)
+                    .label(request.getLabel())
+                    .startTime(request.getStartTime())
+                    .endTime(request.getEndTime())
+                    .repeateType(request.getRepeateType())
+                    .category(request.getCategory())
+                    .build();
+        }
+
+
+        return taskDao.save(task);
+    }
+
+    @Override
     public Task findById(Long id) {
         Task task = null;
         if (taskDao.existsById(id)){
             task = taskDao.findById(id).orElse(null);
         }
+
         return task;
     }
 

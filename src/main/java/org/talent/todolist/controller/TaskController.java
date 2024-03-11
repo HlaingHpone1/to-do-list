@@ -47,4 +47,10 @@ public class TaskController {
         return new ResponseEntity<>("Success Delete", HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping("/tasks/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody NewTaskRequest request){
+        Task task = taskService.updateById(id,request);
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
 }

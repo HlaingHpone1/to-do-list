@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.talent.todolist.dao.CategoryDao;
 import org.talent.todolist.dto.NewCategoryRequest;
+import org.talent.todolist.dto.NewTaskRequest;
 import org.talent.todolist.entity.Category;
 import org.talent.todolist.service.CategoryService;
 
@@ -35,7 +36,26 @@ public class CategoryServiceImpl implements CategoryService {
     public void delete(Long id) {
         if (categoryDao.existsById(id)){
             categoryDao.deleteById(id);
-
         }
+    }
+
+    @Override
+    public Category findById(Long id) {
+        return categoryDao.findById(id).orElse(null);
+    }
+
+    @Override
+    public Category updateById(Long id, NewCategoryRequest request) {
+
+        Category category = null;
+        if (categoryDao.existsById(id)){
+            category = Category.builder()
+                    .id(id)
+                    .name(request.getName())
+                    .imgUrl(request.getImgUrl())
+                    .build();
+        }
+
+        return categoryDao.save(category);
     }
 }
